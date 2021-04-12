@@ -6,3 +6,7 @@
 # CSV to SQL
 
 https://beautifytools.com/csv-to-sql-converter.php
+
+# Pagination
+
+https://stackoverflow.com/questions/26648059/sails-js-how-i-do-pagination-in-sails-js

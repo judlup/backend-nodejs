@@ -23,11 +23,13 @@ module.exports.routes = {
   // Category
   "GET /api/category": "CategoryController.index",
   "GET /api/categories/:id/products": "CategoryController.list",
-  // "GET /api/category/:id": "CategoryController.list",
   "POST /api/category": "CategoryController.add",
   "PUT /api/category": "CategoryController.edit",
   "DELETE /api/category/:id": "CategoryController.delete",
 
+  // Product
+  "GET /api/products": "ProductController.index",
+  "GET /api/products/search": "ProductController.search",
   /***************************************************************************
    *                                                                          *
    * More custom routes here...                                               *
