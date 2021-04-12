@@ -20,8 +20,10 @@ module.exports.routes = {
 
   "/": { view: "pages/homepage" },
 
+  // Category
   "GET /api/category": "CategoryController.index",
-  "GET /api/category/:id": "CategoryController.list",
+  "GET /api/categories/:id/products": "CategoryController.list",
+  // "GET /api/category/:id": "CategoryController.list",
   "POST /api/category": "CategoryController.add",
   "PUT /api/category": "CategoryController.edit",
   "DELETE /api/category/:id": "CategoryController.delete",

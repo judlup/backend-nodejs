@@ -18,5 +18,11 @@ module.exports = {
     Description: { type: "string", allowNull: true },
     Picture: { type: "ref", columnType: "mediumblob" },
     isDeleted: { type: "boolean", defaultsTo: false },
+
+    // Relations
+    Products: {
+      collection: "product",
+      via: "CategoryID",
+    },
   },
 };

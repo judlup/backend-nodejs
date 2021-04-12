@@ -26,17 +26,27 @@ module.exports = {
     let category = await Category.find({
       isDeleted: 0,
       CategoryID: values.id,
-    });
+    }).populate("Products");
+
     let result = [];
-    category.forEach((element) => {
+    category.forEach(async (element) => {
+      let prods;
+      if (element.Products.lenght > 0) {
+        prods = await Product.find({
+          ProductID: element.Products.map((prod) => prod.ProductID),
+        }).populate("SupplierID");
+      } else {
+        prods = [];
+      }
       result.push({
         CategoryID: element.CategoryID,
         CategoryName: element.CategoryName,
         Description: element.Description,
         Picture: element.Picture.toString("base64"),
+        Products: prods,
       });
+      return res.status(200).json(result);
     });
-    return res.status(200).json(result);
   },
 
   add: async function (req, res) {
