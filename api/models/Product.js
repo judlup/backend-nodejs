@@ -12,7 +12,7 @@ module.exports = {
   attributes: {
     ProductID: { type: "number", autoIncrement: true },
     ProductName: { type: "string", required: true },
-    QuantityPerUnit: { type: "number", required: true },
+    QuantityPerUnit: { type: "string", required: true },
     UnitPrice: { type: "number", required: true },
     UnitsInStock: { type: "number", required: true },
     UnitsOnOrder: { type: "number", required: true },

@@ -40,11 +40,61 @@ module.exports = {
   search: async function (req, res) {
     const values = req.allParams();
     const productName = values.productName ? values.productName : "";
-    const categoryName = values.categoryName ? values.categoryName : "";
-    const supplierName = values.supplierName ? values.supplierName : "";
-    // Like operator
-    let result = await Product.find({ ProductName: { contains: productName } });
+    // const categoryName = values.categoryName ? values.categoryName : "";
+    // const supplierName = values.supplierName ? values.supplierName : "";
 
-    res.status(200).json(result);
+    let result = await Product.find()
+      .populate("CategoryID")
+      .populate("SupplierID");
+    let response = result.filter((item) =>
+      item.ProductName.toLowerCase().includes(productName.toLowerCase())
+    );
+
+    res.status(200).json(response);
+  },
+
+  list: async function (req, res) {
+    const values = req.allParams();
+
+    const response = await Product.find({ ProductID: values.id })
+      .populate("CategoryID")
+      .populate("SupplierID");
+
+    response.forEach((element, index) => {
+      response[index].CategoryID.Picture = element.CategoryID.Picture.toString(
+        "base64"
+      );
+    });
+
+    res.status(200).json(response);
+  },
+
+  add: async function (req, res) {
+    const values = req.allParams();
+
+    const response = await Product.create(values).fetch();
+
+    res.status(200).json(response);
+  },
+
+  edit: async function (req, res) {
+    const values = req.allParams();
+    const data = {
+      ProductID: values.id,
+      CategoryID: values.CategoryID,
+      Discontinued: values.Discontinued,
+      ProductName: values.ProductName,
+      QuantityPerUnit: values.QuantityPerUnit,
+      SupplierID: values.SupplierID,
+      UnitPrice: values.UnitPrice,
+      UnitsInStock: values.UnitsInStock,
+      UnitsOnOrder: values.UnitsOnOrder,
+      ReOrderLevel: values.ReOrderLevel,
+    };
+    const response = await Product.update({ ProductID: values.id })
+      .set(data)
+      .fetch();
+
+    res.status(204).json(response);
   },
 };

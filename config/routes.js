@@ -30,6 +30,14 @@ module.exports.routes = {
   // Product
   "GET /api/products": "ProductController.index",
   "GET /api/products/search": "ProductController.search",
+  "GET /api/products/:id": "ProductController.list",
+  "POST /api/products": "ProductController.add",
+  "PUT /api/products/:id": "ProductController.edit",
+
+  // Supplier
+  "GET /api/suppliers/:id": "SupplierController.list",
+  "GET /api/suppliers/:id/products": "SupplierController.products",
+  "DELETE /api/suppliers/:id": "SupplierController.delete",
   /***************************************************************************
    *                                                                          *
    * More custom routes here...                                               *
